@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/UniversalInventory/Editor/ItemEditor/ImagesContainer.gd" type="Script" id=1]
+[ext_resource path="res://addons/UniversalInventory/Editor/ItemEditor/Image.tscn" type="PackedScene" id=2]
+
+[node name="ImagesContainer" type="ScrollContainer"]
+margin_top = 167.0
+margin_right = 497.0
+margin_bottom = 504.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MainContainer" type="VBoxContainer" parent="."]
+margin_right = 497.0
+margin_bottom = 66.0
+size_flags_horizontal = 3
+
+[node name="ItemContainer" type="VBoxContainer" parent="MainContainer"]
+margin_right = 497.0
+margin_bottom = 42.0
+
+[node name="Header" type="HBoxContainer" parent="MainContainer/ItemContainer"]
+margin_right = 497.0
+margin_bottom = 14.0
+
+[node name="Name" type="Label" parent="MainContainer/ItemContainer/Header"]
+margin_right = 160.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 160, 0 )
+text = "Name"
+
+[node name="Path" type="Label" parent="MainContainer/ItemContainer/Header"]
+margin_left = 164.0
+margin_right = 413.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Path"
+
+[node name="Primary" type="Label" parent="MainContainer/ItemContainer/Header"]
+margin_left = 417.0
+margin_right = 497.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 80, 0 )
+text = "Primary"
+
+[node name="ItemImage" parent="MainContainer/ItemContainer" instance=ExtResource( 2 )]
+margin_top = 18.0
+margin_right = 497.0
+margin_bottom = 42.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContainer"]
+margin_top = 46.0
+margin_right = 497.0
+margin_bottom = 66.0
+
+[node name="NewButton" type="Button" parent="MainContainer/HBoxContainer"]
+margin_right = 113.0
+margin_bottom = 20.0
+text = "Add New Image"
+
+[connection signal="pressed" from="MainContainer/HBoxContainer/NewButton" to="." method="_on_NewButton_pressed"]

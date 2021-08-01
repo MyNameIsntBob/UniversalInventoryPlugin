@@ -1,0 +1,43 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Node2D",
+"class": "Inventory",
+"language": "GDScript",
+"path": "res://addons/UniversalInventory/Nodes/Inventory.gd"
+}, {
+"base": "Reference",
+"class": "InventoryResources",
+"language": "GDScript",
+"path": "res://addons/UniversalInventory/Resource/InventoryResources.gd"
+} ]
+_global_script_class_icons={
+"Inventory": "",
+"InventoryResources": ""
+}
+
+[application]
+
+config/name="Inventory"
+run/main_scene="res://addons/UniversalInventory/Editor/InventoryEditor/InventoryScreen.tscn"
+config/icon="res://icon.png"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/UniversalInventory/plugin.cfg" )
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"

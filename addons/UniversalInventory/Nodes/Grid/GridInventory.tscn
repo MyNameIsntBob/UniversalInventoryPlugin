@@ -1,0 +1,68 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/UniversalInventory/Nodes/Grid/GridInventory.gd" type="Script" id=1]
+[ext_resource path="res://addons/UniversalInventory/Nodes/Grid/Slot.tscn" type="PackedScene" id=2]
+
+[node name="GridInventory" type="GridContainer"]
+margin_left = 0.222733
+margin_right = 120.223
+margin_bottom = 101.0
+custom_constants/vseparation = 5
+custom_constants/hseparation = 5
+columns = 4
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.0
+anchor_right = 0.0
+
+[node name="Panel2" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.0
+anchor_right = 0.0
+margin_left = 15.0
+margin_right = 25.0
+
+[node name="Panel3" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.0
+anchor_right = 0.0
+margin_left = 30.0
+margin_right = 40.0
+
+[node name="Panel4" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.0
+anchor_right = 0.0
+margin_left = 45.0
+margin_right = 55.0
+
+[node name="Panel5" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.0
+anchor_right = 0.0
+margin_top = 15.0
+margin_bottom = 25.0
+
+[node name="Panel6" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.0
+anchor_right = 0.0
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 25.0
+margin_bottom = 25.0
+
+[node name="Panel7" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.0
+anchor_right = 0.0
+margin_left = 30.0
+margin_top = 15.0
+margin_right = 40.0
+margin_bottom = 25.0
+
+[node name="Panel8" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.0
+anchor_right = 0.0
+margin_left = 45.0
+margin_top = 15.0
+margin_right = 55.0
+margin_bottom = 25.0

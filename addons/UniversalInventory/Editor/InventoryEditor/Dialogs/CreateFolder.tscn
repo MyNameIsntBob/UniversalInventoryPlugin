@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/UniversalInventory/Editor/InventoryEditor/Dialogs/CreateFolder.gd" type="Script" id=1]
+[ext_resource path="res://addons/UniversalInventory/Editor/InventoryEditor/Dialogs/Notification.tscn" type="PackedScene" id=2]
+
+[node name="CreateFolder" type="AcceptDialog"]
+margin_right = 195.0
+margin_bottom = 102.0
+window_title = "Create File"
+dialog_hide_on_ok = false
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+name_node_path = NodePath("CenterContainer/HBoxContainer/LineEdit")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+margin_top = 17.0
+margin_right = 179.0
+margin_bottom = 41.0
+
+[node name="Label" type="Label" parent="CenterContainer/HBoxContainer"]
+margin_top = 5.0
+margin_right = 75.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 75, 0 )
+text = "Name:"
+
+[node name="LineEdit" type="LineEdit" parent="CenterContainer/HBoxContainer"]
+margin_left = 79.0
+margin_right = 179.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 100, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Notification" parent="." instance=ExtResource( 2 )]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 187.0
+margin_bottom = 66.0
+window_title = ""
+dialog_text = ""
+
+[connection signal="confirmed" from="." to="." method="_on_CreateFolder_confirmed"]

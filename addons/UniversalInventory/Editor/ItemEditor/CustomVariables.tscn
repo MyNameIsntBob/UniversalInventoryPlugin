@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/UniversalInventory/Editor/ItemEditor/CustomVariables.gd" type="Script" id=1]
+
+[node name="CustomVariables" type="ScrollContainer"]
+margin_top = 119.0
+margin_right = 497.0
+margin_bottom = 504.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 497.0
+margin_bottom = 385.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ButtonContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 497.0
+margin_bottom = 20.0
+
+[node name="Button" type="Button" parent="VBoxContainer/ButtonContainer"]
+margin_right = 124.0
+margin_bottom = 20.0
+text = "Add New Variable"
+
+[connection signal="pressed" from="VBoxContainer/ButtonContainer/Button" to="." method="_on_Button_pressed"]

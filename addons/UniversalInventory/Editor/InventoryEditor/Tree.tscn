@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/UniversalInventory/Editor/InventoryEditor/Tree.gd" type="Script" id=1]
+
+[node name="Tree" type="Tree"]
+margin_right = 150.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 150, 0 )
+allow_rmb_select = true
+hide_root = true
+drop_mode_flags = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="item_activated" from="." to="." method="_on_Tree_item_activated"]
+[connection signal="item_rmb_selected" from="." to="." method="_on_Tree_item_rmb_selected"]

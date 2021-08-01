@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="Notification" type="AcceptDialog"]
+margin_right = 48.0
+margin_bottom = 40.0
+window_title = "Unable to Save"
+dialog_text = "This folder already exists at the given path."

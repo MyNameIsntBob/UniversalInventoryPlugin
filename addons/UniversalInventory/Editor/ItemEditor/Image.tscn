@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/UniversalInventory/Editor/ItemEditor/Image.gd" type="Script" id=1]
+
+[node name="ItemImage" type="HBoxContainer"]
+margin_right = 358.0
+margin_bottom = 24.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NameEdit" type="LineEdit" parent="."]
+margin_right = 160.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 160, 0 )
+
+[node name="PathEdit" type="LineEdit" parent="."]
+margin_left = 164.0
+margin_right = 314.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 150, 0 )
+size_flags_horizontal = 3
+editable = false
+selecting_enabled = false
+
+[node name="CheckBox" type="CheckBox" parent="."]
+margin_left = 318.0
+margin_right = 342.0
+margin_bottom = 24.0
+
+[node name="ButtonSelect" type="Button" parent="."]
+margin_left = 346.0
+margin_right = 370.0
+margin_bottom = 24.0
+text = "..."
+
+[node name="DeleteButton" type="Button" parent="."]
+margin_left = 374.0
+margin_right = 386.0
+margin_bottom = 24.0
+flat = true
+
+[connection signal="text_changed" from="NameEdit" to="." method="_on_NameEdit_text_changed"]
+[connection signal="text_changed" from="PathEdit" to="." method="_on_PathEdit_text_changed"]
+[connection signal="toggled" from="CheckBox" to="." method="_on_CheckBox_toggled"]
+[connection signal="pressed" from="DeleteButton" to="." method="_on_DeleteButton_pressed"]

@@ -1,0 +1,105 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/UniversalInventory/Editor/ItemEditor/CustomItemVariable.gd" type="Script" id=1]
+
+[sub_resource type="Image" id=3]
+data = {
+"data": PoolByteArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
+"format": "LumAlpha8",
+"height": 16,
+"mipmaps": false,
+"width": 16
+}
+
+[sub_resource type="ImageTexture" id=2]
+flags = 4
+flags = 4
+image = SubResource( 3 )
+size = Vector2( 16, 16 )
+
+[node name="CustomItemVariable" type="HBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_top = 13.0
+margin_right = 42.0
+margin_bottom = 27.0
+text = "Name:"
+
+[node name="NameEdit" type="LineEdit" parent="."]
+margin_left = 46.0
+margin_right = 106.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 60, 0 )
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 110.0
+margin_top = 13.0
+margin_right = 152.0
+margin_bottom = 27.0
+text = "  Type:"
+
+[node name="OptionButton" type="OptionButton" parent="."]
+margin_left = 156.0
+margin_right = 237.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 60, 0 )
+size_flags_horizontal = 3
+text = "Number"
+items = [ "Number", null, false, 0, null, "Text", null, false, 1, null, "Boolean", null, false, 2, null, "Option", null, false, 3, null ]
+selected = 0
+
+[node name="Label3" type="Label" parent="."]
+margin_left = 241.0
+margin_top = 13.0
+margin_right = 288.0
+margin_bottom = 27.0
+text = "  Value:"
+
+[node name="StringValue" type="LineEdit" parent="."]
+visible = false
+margin_left = 271.0
+margin_right = 329.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+
+[node name="NumberValue" type="SpinBox" parent="."]
+margin_left = 292.0
+margin_right = 366.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+
+[node name="BooleanValue" type="OptionButton" parent="."]
+visible = false
+margin_left = 411.0
+margin_right = 440.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "False"
+items = [ "False", null, false, 0, null, "True", null, false, 1, null ]
+selected = 0
+
+[node name="OptionValue" type="OptionButton" parent="."]
+margin_left = 370.0
+margin_right = 399.0
+margin_bottom = 40.0
+
+[node name="DeleteButton" type="Button" parent="."]
+margin_left = 403.0
+margin_right = 431.0
+margin_bottom = 40.0
+icon = SubResource( 2 )
+flat = true
+
+[connection signal="text_changed" from="NameEdit" to="." method="set_name"]
+[connection signal="item_selected" from="OptionButton" to="." method="change_type"]
+[connection signal="text_changed" from="StringValue" to="." method="set_value"]
+[connection signal="value_changed" from="NumberValue" to="." method="set_value"]
+[connection signal="item_selected" from="BooleanValue" to="." method="_on_BooleanValue_item_selected"]
+[connection signal="item_selected" from="OptionValue" to="." method="set_value"]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/UniversalInventory/Editor/InventoryEditor/Dialogs/DeleteItem.gd" type="Script" id=1]
+
+[node name="DeleteItem" type="ConfirmationDialog"]
+margin_right = 265.0
+margin_bottom = 70.0
+window_title = "You're about to delete something."
+resizable = true
+dialog_text = "Are you sure you would like to do that?"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="confirmed" from="." to="." method="_on_DeleteItem_confirmed"]

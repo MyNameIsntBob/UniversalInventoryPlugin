@@ -1,0 +1,28 @@
+{
+	"Armor": {
+
+	},
+	"Consumable": {
+
+	},
+	"Equipable": {
+		"Armor": {
+
+		},
+		"Weapon": {
+			"Bow": {
+				"0": {
+					"name": "Long Bow",
+					"type": "item"
+				}
+			},
+			"Sword": {
+				"3": {
+					"description": "Test",
+					"name": "Short Sword",
+					"type": "item"
+				}
+			}
+		}
+	}
+}
