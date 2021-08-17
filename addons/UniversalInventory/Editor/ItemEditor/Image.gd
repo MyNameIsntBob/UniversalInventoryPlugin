@@ -1,3 +1,4 @@
+tool
 extends HBoxContainer
 
 var data : Dictionary = {} setget set_data

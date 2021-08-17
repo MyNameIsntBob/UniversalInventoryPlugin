@@ -35,62 +35,156 @@ static func set_json(path: String, data: Dictionary):
 		file.close()
 	return err
 	
-# Returns an array of item id's
-static func get_items(path: Array = []) -> Array:
+## *****************************************************************************
+##							  Manage Data
+## *****************************************************************************
+
+static func get_data(type: String, path: Array = []) -> Array:
 	var item_path = get_path("RESOURCES_DIR", "items")
 	var old_data = load_json(item_path)
 	for val in path:
-		if not val in old_data:
+		if 'categories' in old_data:
+			old_data = get_by_id(old_data.categories, val)
+		
+		else:
 			return []
 			
-		old_data = old_data[val]
-	return old_data.keys()
+	if type in old_data:
+		return old_data[type]
+		
+	return []
 
-static func get_item(item_id: String, default: Dictionary={}) -> Dictionary: 
-	item_id = str(item_id)
-	var item_path = get_path("RESOURCES_DIR", 'items')
+static func set_data(type: String, data: Dictionary, path: Array = []) -> bool:
+	var item_path = get_path("RESOURCES_DIR", "items")
+	var old_data = load_json(item_path)
+	var sub_data = old_data
+	for val in path:
+		if 'categories' in sub_data:
+			sub_data = get_by_id(sub_data.categories, val)
+
+		else:
+			return false
+
+	if type in sub_data:
+		var index = get_index_by_id(sub_data[type], data.id)
+		if index == -1:
+			sub_data[type].append(data)
+		else:
+			sub_data[type][index] = data
+
+	else:
+		sub_data[type] = [data]
+
+	set_json(item_path, old_data)
+	return true
+	
+static func delete_data(type: String, id: int, path: Array = []) -> bool:
+	var item_path = get_path("RESOURCES_DIR", "items")
+	var old_data = load_json(item_path)
+	var sub_data = old_data
+	for val in path:
+		if 'categories' in sub_data:
+			sub_data = get_by_id(sub_data.categories, val)
+
+		else:
+			return false
+
+	if type in sub_data:
+		sub_data[type].remove(get_index_by_id(sub_data[type], id))
+	else:
+		return false
+
+	set_json(item_path, old_data)
+	return true
+
+## *****************************************************************************
+##								Items
+## *****************************************************************************
+	
+# Returns an array of item id's
+static func get_items(path: Array = []) -> Array:
+	return get_data('items', path)
+
+static func get_item(item_id: int, path: Array = [], default: Dictionary={}) -> Dictionary: 
+	var items = get_items(path)
+	return get_by_id(items, item_id)
+
+static func set_item(data: Dictionary, path: Array = []) -> bool:
+	return set_data('items', data, path)
+
+static func delete_item(item_id: int, path: Array = []) -> bool:
+	return delete_data('items', item_id, path)
+
+## *****************************************************************************
+##								Variables
+## *****************************************************************************
+
+static func get_variables(item, path: Array = []) -> Array:
+	var item_path = get_path("RESOURCES_DIR", "items")
 	var data = load_json(item_path)
-	return data[item_id] if item_id in data else default
+	var variables = []
+	for val in path:
+		if not val in data:
+			data[val] = {}
+			
+		if 'variables' in data:
+			variables += data.variables
+		data = data[val]
+	return variables
 
-static func set_item(item_id, data: Dictionary, path: Array = []):
-	data.type = "item"
-	item_id = str(item_id)
-	var item_path = get_path("RESOURCES_DIR", 'items')
-	var old_data = load_json(item_path)
-	var sub_data = old_data
-	for val in path:
-		if not val in sub_data:
-			sub_data[val] = {}
-		
-		sub_data = sub_data[val]
-	sub_data[item_id] = data
-	set_json(item_path, old_data)
-	
-static func add_category(name, path: Array = []) -> bool:
-	var item_path = get_path("RESOURCES_DIR", 'items')
-	var old_data = load_json(item_path)
-	var sub_data = old_data
-	for val in path:
-		if not val in sub_data:
-			sub_data[val] = {}
-		
-		sub_data = sub_data[val]
-	var success = false
-	if ! name in sub_data:
-		sub_data[name] = {}
-		success = true
+static func delete_variable(var_id: int, path: Array = []) -> bool:
+	return delete_data('variables', var_id, path)
 
-	set_json(item_path, old_data)
-	return success
+static func set_variable(data: Dictionary, path: Array = []) -> bool:
+	return set_data("variables", data, path)
+
+
+## *****************************************************************************
+##								Others
+## *****************************************************************************
 	
-static func delete_item(item_id, path: Array = []):
-	var item_path = get_path("RESOURCES_DIR", 'items')
-	var old_data = load_json(item_path)
-	var sub_data = old_data
-	for val in path:
-		sub_data = sub_data[val]
-	sub_data.erase(item_id)
-	set_json(item_path, old_data)
+static func get_by_id(data: Array, id: int) -> Dictionary:
+	for item in data:
+		if 'id' in item and item.id == id:
+			return item
+	return {}
+	
+static func get_index_by_id(data: Array, id: int) -> int:
+	for i in range(len(data)):
+		if 'id' in data[i] and data[i].id == id:
+			return i
+	return -1
+
+# Returns an array of item id's
+static func get_categories(path: Array = []) -> Array:
+	return get_data('categories', path)
+
+static func set_category(data: Dictionary, path: Array = []) -> bool:
+	return set_data("categories", data, path)
+#	var item_path = get_path("RESOURCES_DIR", 'items')
+#	var old_data = load_json(item_path)
+#	var sub_data = old_data
+#	for val in path:
+#		if 'categories' in sub_data:
+#			sub_data = get_by_id(sub_data.categories, val)
+#
+#		else:
+#			return false
+#
+#	if 'categories' in sub_data:
+#		var index = get_index_by_id(sub_data.categories, data.id)
+#		if index == -1:
+#			sub_data.categories.append(data)
+#		else:
+#			sub_data.categories[index] = data
+#	else:
+#		sub_data.categories = [data]
+#
+#	set_json(item_path, old_data)
+#	return true
+
+	
+#static func delete_category(id)
 	
 ## *****************************************************************************
 ##								Get Paths

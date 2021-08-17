@@ -1,3 +1,4 @@
+tool
 extends ScrollContainer
 
 # An array of the images that will be used to

@@ -19,10 +19,24 @@ func _ready():
 
 
 
-func _on_Tree_select_item(data, path, id):
+func _on_Tree_select_item(data, path):
 	item_editor.show()
 	empty_screen.hide()
 	item_editor.data = data
 	item_editor.path = path
-	item_editor.id = id
+	
 
+# Close the item that's open if it's a sub of the category closed or if it's the item deleted 
+# (currently doesn't work right)
+func _on_DeleteItem_delete_item(path, id = null):
+	var item = $HSplitContainer/Item
+	var in_path = true
+	for i in range(len(path)):
+		if item.path[i] != path[i]:
+			in_path = false
+	
+	if (id == item.data.id or id == null) and in_path:
+		item_editor.hide()
+		empty_screen.show()
+		item_editor.data = {}
+		item_editor.path = [] 

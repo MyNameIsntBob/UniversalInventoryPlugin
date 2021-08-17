@@ -32,8 +32,22 @@ func _on_CreateFolder_confirmed():
 		notify("You must give a name for the category.")
 		return
 	
-	if InventoryResources.add_category(text, path):
+	var category_id = 0
+	var categories = InventoryResources.get_categories(path)
+	var ids = []
+	
+	for category in categories:
+		if 'id' in category:
+			ids.append(int(int(category.id)))
+	while true:
+		if category_id in ids:
+			category_id += 1
+		else:
+			break
+	
+	if InventoryResources.set_category({'id': category_id, 'name': text}, path):
 		emit_signal('folder_created')
 		hide()
 	else:
 		notify("This folder already exists at the given path.")
+

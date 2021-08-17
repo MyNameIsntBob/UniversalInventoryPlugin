@@ -9,6 +9,10 @@
 [node name="InventoryScreen" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
@@ -17,21 +21,22 @@ __meta__ = {
 }
 
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_right = 1004.0
+margin_bottom = 580.0
 
 [node name="Tree" parent="HSplitContainer" instance=ExtResource( 2 )]
+margin_bottom = 580.0
 
 [node name="CenterContainer" type="CenterContainer" parent="HSplitContainer"]
 margin_left = 162.0
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_right = 1004.0
+margin_bottom = 580.0
 
 [node name="Label" type="Label" parent="HSplitContainer/CenterContainer"]
-margin_left = 340.0
-margin_top = 293.0
-margin_right = 522.0
-margin_bottom = 307.0
+margin_left = 330.0
+margin_top = 283.0
+margin_right = 512.0
+margin_bottom = 297.0
 text = "This is the Inventory Screen."
 
 [node name="Item" parent="HSplitContainer" instance=ExtResource( 3 )]
@@ -39,21 +44,23 @@ visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 162.0
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_right = 1004.0
+margin_bottom = 580.0
 
 [node name="CreateFolder" parent="." instance=ExtResource( 4 )]
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_right = 1004.0
+margin_bottom = 580.0
 window_title = "Create Folder"
 
 [node name="DeleteItem" parent="." instance=ExtResource( 5 )]
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_right = 1004.0
+margin_bottom = 580.0
 
 [connection signal="create_item" from="HSplitContainer/Tree" to="CreateFolder" method="request_confirm"]
 [connection signal="delete_item" from="HSplitContainer/Tree" to="DeleteItem" method="request_confirm"]
 [connection signal="select_item" from="HSplitContainer/Tree" to="." method="_on_Tree_select_item"]
+[connection signal="delete_item" from="HSplitContainer/Item" to="DeleteItem" method="request_confirm"]
 [connection signal="item_saved" from="HSplitContainer/Item" to="HSplitContainer/Tree" method="build_folders"]
 [connection signal="folder_created" from="CreateFolder" to="HSplitContainer/Tree" method="build_folders"]
-[connection signal="delete_item" from="DeleteItem" to="HSplitContainer/Tree" method="delete_item"]
+[connection signal="close_item" from="DeleteItem" to="." method="_on_DeleteItem_delete_item"]
+[connection signal="delete_item" from="DeleteItem" to="HSplitContainer/Tree" method="build_folders"]

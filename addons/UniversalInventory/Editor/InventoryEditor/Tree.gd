@@ -7,7 +7,7 @@ var character_icon
 var topic_icon
 var conversation_icon
 
-signal select_item(data, path, id)
+signal select_item(data, path)
 
 signal create_item(path)
 signal delete_item(path, item_name, type)
@@ -33,28 +33,35 @@ func _ready():
 		modifier = '-2'
 		rect_min_size.x = 360
 	rect_size.x = 0
-	topic_icon = load("res://addons/customDialog/Images/Resources/timeline" + modifier + ".svg")
-	character_icon = load("res://addons/customDialog/Images/Resources/character" + modifier + ".svg")
-	conversation_icon = load("res://addons/customDialog/Images/Resources/theme" + modifier + ".svg")
 	
 	build_folders()
 
 func build_files(data, folder, file_path = []):
-	for key in data:
-		if 'type' in data[key] and data[key].type == 'item':
-			var item = create_item(folder)
-			item.set_metadata(0, {'data': data[key], 'path': file_path, "id": key, 'type': 'Item'})
-			item.set_text(0, data[key].name if 'name' in data[key] else 'No Name')
-			
-		else:
+	if 'categories' in data:
+		for category in data.categories:
 			var new_folder = create_item(folder)
 			new_folder.set_icon(0, get_icon("Folder", "EditorIcons"))
-			new_folder.set_metadata(0, {'path': file_path, 'name': key, 'type': 'Folder'})
-			new_folder.set_text(0, key)
+			new_folder.set_metadata(0, {'path': file_path, 'id': category.id, 'type': 'Folder'})
+			new_folder.set_text(0, category.name if 'name' in category else '')
 			
 			var new_path = file_path.duplicate()
-			new_path.push_back(key)
-			build_files(data[key], new_folder, new_path)
+			new_path.push_back(category.id)
+			build_files(category, new_folder, new_path)
+			
+	if 'items' in data:
+		for item in data.items:
+			var item_node = create_item(folder)
+			item_node.set_icon(0, get_icon("Bone2D", "EditorIcons"))
+			item_node.set_metadata(0, {"data": item, 'path': file_path, 'type': 'Item'})
+			item_node.set_text(0, item.name if 'name' in item else 'No Name')
+	
+#	Do variables in the drop down menu 
+#	if 'variables' in data:
+#		var variables_node = create_item(folder)
+#		variables_node.set_icon(0, get_icon("TileMap", "EditorIcons"))
+#		variables_node.set_metadata(0, {'data': data.variables, 'path': file_path, 'type': 'Variables'})
+#		variables_node.set_text(0, 'Variables')
+
 
 func build_folders():
 	self.clear()
@@ -99,19 +106,21 @@ func create_rmb_context_menus():
 
 func create_new_item(path: Array = []):
 	var item_id = 0
-	var items = InventoryResources.get_items()
+	var items = InventoryResources.get_items(path)
+	var ids = []
+	
+	# Ew you loop it 2 times, when that's a bit pointless
+	for item in items:
+		if 'id' in item:
+			ids.append(int(item.id))
 	while true:
-		if str(item_id) in items:
+		if item_id in ids:
 			item_id += 1
 		else:
 			break
-	InventoryResources.set_item(item_id, {}, path)
+	InventoryResources.set_item({'id': item_id}, path)
 	build_folders()
 	
-func delete_item(item_name, path):
-	InventoryResources.delete_item(item_name, path)
-	build_folders()
-
 func _on_root_menu_item_pressed(id):
 	var item = get_selected()
 	var data = item.get_metadata(0) if item != null else ''
@@ -138,7 +147,7 @@ func _on_item_menu_item_pressed(id):
 		
 	# If remove item is clicked and then rebuild the folders
 	else:
-		emit_signal('delete_item', data.path, data.id, 'Item')
+		emit_signal('delete_item', data.path, data.data.id, 'Items')
 	
 func _on_folder_menu_item_pressed(id):
 	var item = get_selected()
@@ -147,18 +156,18 @@ func _on_folder_menu_item_pressed(id):
 	# If add category is pressed 
 	if id == 0:
 		var new_path = data.path.duplicate()
-		new_path.append(data.name)
+		new_path.append(data.id)
 		emit_signal('create_item', new_path)
-	
+
 	# If add item is pressed
 	elif id == 1:
 		var new_path = data.path.duplicate()
-		new_path.append(data.name)
+		new_path.append(data.id)
 		create_new_item(new_path)
 	
 	# If Delete is pressed
 	else:
-		emit_signal("delete_item", data.path, data.name, 'Folder')
+		emit_signal("delete_item", data.path, data.id, 'Folder')
 
 func view_in_file_manager():
 	var item = get_selected()
@@ -175,7 +184,7 @@ func _on_Tree_item_activated():
 	var data = item.get_metadata(0) if item != null else ''
 	
 	if 'type' in data and data.type == 'Item':
-		emit_signal('select_item', data.data, data.path, data.id)
+		emit_signal('select_item', data.data, data.path)
 
 
 func _on_Tree_item_rmb_selected(position):

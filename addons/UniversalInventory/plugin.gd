@@ -19,7 +19,8 @@ func _enter_tree():
 	)
 
 	InventoryResources.init_dialog_files()
-#	InventoryResources.set_item(1, {'Name': "Long Bow", 'hp': 7}, ["Equipable", 'Weapon', "Bow"])
+#	InventoryResources.set_item({'id': 2, 'Name': "Long Bow", 'hp': 6}, [1])
+#	InventoryResources.set_item({'id': 1, 'Name': "Chest Plate", 'Armor': 3}, [1, 1])
 
 
 func _exit_tree():

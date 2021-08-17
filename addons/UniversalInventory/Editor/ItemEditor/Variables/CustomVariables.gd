@@ -1,3 +1,4 @@
+tool
 extends ScrollContainer
 
 const VAR_ITEM = preload("CustomItemVariable.tscn")

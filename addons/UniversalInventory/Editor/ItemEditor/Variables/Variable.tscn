@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/UniversalInventory/Editor/ItemEditor/Variables/Variable.gd" type="Script" id=1]
+
+[node name="Variable" type="HBoxContainer"]
+margin_right = 204.0
+margin_bottom = 24.0
+custom_constants/separation = 4
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_top = 5.0
+margin_right = 100.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 100, 0 )
+text = "Generic Label:"
+
+[node name="LineEdit" type="LineEdit" parent="."]
+margin_left = 104.0
+margin_right = 162.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 50, 0 )
+
+[connection signal="text_changed" from="LineEdit" to="." method="_on_LineEdit_text_changed"]

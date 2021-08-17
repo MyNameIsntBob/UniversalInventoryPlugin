@@ -1,28 +1,45 @@
 {
-	"Armor": {
-
-	},
-	"Consumable": {
-
-	},
-	"Equipable": {
-		"Armor": {
-
-		},
-		"Weapon": {
-			"Bow": {
-				"0": {
-					"name": "Long Bow",
-					"type": "item"
+	"categories": [
+		{
+			"categories": [
+				{
+					"id": 1,
+					"items": [
+						{
+							"armor": 3,
+							"description": "Protect thy chest.",
+							"id": 1,
+							"name": "Chest Plate"
+						}
+					],
+					"name": "Armor"
 				}
-			},
-			"Sword": {
-				"3": {
-					"description": "Test",
-					"name": "Short Sword",
-					"type": "item"
+			],
+			"id": 1,
+			"items": [
+				{
+					"description": "A long ranged bow that deals heavy damage an the cost of speed. ",
+					"hp": 6,
+					"id": 2,
+					"name": "Long Bow"
 				}
-			}
+			],
+			"name": "Equipable"
 		}
-	}
+	],
+	"items": [
+		{
+			"description": "A Short ranged bow that's quick and efficient. ",
+			"hp": 7,
+			"id": 1,
+			"name": "Short Bow"
+		},
+		{
+			"id": 0,
+			"name": "test"
+		}
+	],
+	"variables": [
+
+	]
 }
